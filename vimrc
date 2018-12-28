@@ -15,6 +15,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " plugin on GitHub repo
 Plugin 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
+Plugin 'vim-syntastic/syntastic'
 
 Plugin 'majutsushi/tagbar'
 Plugin 'easymotion/vim-easymotion'
@@ -25,6 +26,7 @@ Plugin 'Yggdroot/LeaderF'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'rust-lang/rust.vim'
 
 " Plugin 'tpope/vim-fugitive'
 " Plugin 'Shougo/neosnippet.vim'
@@ -186,6 +188,19 @@ nnoremap <leader>lp :lprevious<CR>
 " windows
 nnoremap <leader>wc :close<CR>
 nnoremap <leader>wo :only<CR>
+nnoremap <leader>w+ <C-W>+
+nnoremap <leader>w- <C-W>-
+nnoremap <leader>w< <C-W><
+nnoremap <leader>w> <C-W>>
+nnoremap <leader>w= <C-W>=
+" next window
+nnoremap <leader>wp <C-W>p
+" move to new tab
+nnoremap <leader>wt <C-W>t 
+
+nnoremap <leader>ws <C-W>s 
+nnoremap <leader>wv <C-W>v 
+
 
 " buffer
 nnoremap <leader>bp :bprevious<CR>
@@ -204,4 +219,23 @@ command! FormatJSON %!python -m json.tool
 
 " sign
 iabbrev cjl changjiulong@4paradigm.com
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Syntastic
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" errors
+nnoremap <leader>en :lnext<CR>
+nnoremap <leader>ep :lprevious<CR>
+nnoremap <leader>el :Errors<CR>
+nnoremap <leader>ec :SyntasticReset<CR>
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 

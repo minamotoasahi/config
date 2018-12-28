@@ -81,11 +81,16 @@ nnoremap / :action Find<CR>
 nnoremap <Leader>/ /
 
 nnoremap <Leader>;; :action CommentByLineComment<CR>
+vnoremap <Leader>;; :action CommentByLineComment<CR>
+" map <C-/> to comment lime
+" map <C-S-/> to comment block
 
 nnoremap [[ :action MethodUp<CR>
 nnoremap ]] :action MethodDown<CR>
 
-nnoremap <Leader>bb :action ToggleLineBreakpoint<CR>
+nnoremap <Leader>bl :action ToggleLineBreakpoint<CR>
+nnoremap <Leader>bf :action ToggleFieldBreakpoint<CR>
+nnoremap <Leader>bm :action ToggleMethodBreakpoint<CR>
 nnoremap <Leader>bv :action ViewBreakpoints<CR>
 
 " nnoremap <Leader>cv :action ChangeView<CR>
@@ -97,17 +102,21 @@ nnoremap <Leader>ga :action GotoAction<CR>
 nnoremap <Leader>gc :action GotoClass<CR>
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap <C-t> :action Back<CR>
-nnoremap <Leader>gf :action GotoFile<CR>
 nnoremap <Leader>gi :action GotoImplementation<CR>
 nnoremap <Leader>gs :action GotoSymbol<CR>
+nnoremap <Leader>gu :action GotoSuperMethod<CR>
 nnoremap <Leader>gt :action GotoTest<CR>
 
 nnoremap <Leader>en :action GotoNextError<CR>
-nnoremap <Leader>ep :action GotoNextError<CR>
+nnoremap <Leader>ep :action GotoPreviousError<CR>
 nnoremap <Leader>ef :action ShowIntentionActions<CR>
 
 
-" nnoremap <Leader>fp :action ShowFilePath<CR>
+" file
+nnoremap <Leader>fs :action GotoFile<CR>
+nnoremap <Leader>fr :action RecentFiles<CR>
+nnoremap <Leader>fn :action RenameFile<CR>
+
 nnoremap <Leader>uf :action FindUsages<CR>
 nnoremap <Leader>us :action ShowUsages<CR>
 
@@ -115,18 +124,10 @@ nnoremap <Leader>us :action ShowUsages<CR>
 
 " nnoremap <Leader>mv :action ActivateMavenProjectsToolWindow<CR>
 
-nnoremap <Leader>oi :action OptimizeImports<CR>
 
+" popup something
 nnoremap <Leader>pm :action ShowPopupMenu<CR>
-
-nnoremap <Leader>re :action RenameElement<CR>
-nnoremap <Leader>rf :action RenameFile<CR>
-
-nnoremap <Leader>tl Vy<CR>:action ActivateTerminalToolWindow<CR>
-vnoremap <Leader>tl y<CR>:action ActivateTerminalToolWindow<CR>
-
-nnoremap <Leader>rr :action Run<CR>
-nnoremap <Leader>rc :action RunClass<CR>
+nnoremap <Leader>ps :action FileStructurePopup<CR>
 
 nnoremap <Leader>ve :e ~/.ideavimrc<CR>
 nnoremap <Leader>vs :source ~/.ideavimrc<CR>
@@ -135,17 +136,39 @@ nnoremap <Leader>wc :action CloseContent<CR>
 nnoremap <Leader>wo :action CloseAllEditorsButActive<CR>
 nnoremap <Leader>wa :action CloseAllEditors<CR>
 
-nnoremap <Leader>cc :action EditorCompleteStatement<CR>
+nnoremap <Leader>sh :action TypeHierarchy<CR>
+nnoremap <Leader>sc :action CallHierarchy<CR>
+nnoremap <Leader>tl Vy<CR>:action ActivateTerminalToolWindow<CR>
+vnoremap <Leader>tl y<CR>:action ActivateTerminalToolWindow<CR>
+
+" nnoremap <Leader>cc :action EditorCompleteStatement<CR>
+" map to <Ctrl-Shift-CR>
+" nnoremap <Leader>ci :action CodeCompletion<CR>
+" map to <Ctrl-Shift-C>
+" vnoremap <Leader>xs :action GuiDesigner.SurroundPopup<CR>
+" map to <Ctrl-Shift-S>
+nnoremap <Leader>co :action OptimizeImports<CR>
+nnoremap <Leader>cf :action ReformatCode<CR>
+nnoremap <Leader>cg :action Generate<CR>
+
 nnoremap <Leader>pp :action SelectInProjectView<CR>
+
+nnoremap <Leader>rr :action Run<CR>
+nnoremap <Leader>rc :action RunClass<CR>
 
 nnoremap <Leader>dd :action Debug<CR>
 nnoremap <Leader>dc :action DebugClass<CR>
 nnoremap <Leader>di :action StepInto<CR>
-nnoremap <Leader>dj :action StepOut<CR>
-nnoremap <Leader>do :action StepOver<CR>
+nnoremap <Leader>do :action StepOut<CR>
+nnoremap <Leader>dn :action StepOver<CR>
 nnoremap <Leader>df :action ForceStepInto<CR>
 nnoremap <Leader>dr :action Resume<CR>
+nnoremap <Leader>ds :action Stop<CR>
 
-nnoremap <Leader>hc :action TypeHierarchy<CR>
-nnoremap <Leader>hm :action CallHierarchy<CR>
 " MethodHierarchy                                    <M-S-H>
+
+" jump
+nmap <leader>jc :action KJumpAction<cr>
+nmap <leader>jw :action KJumpAction.Word0<cr>
+nmap <leader>jl :action KJumpAction.Line<cr>
+
