@@ -27,6 +27,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'rust-lang/rust.vim'
+Plugin 'altercation/vim-colors-solarized'
 
 " Plugin 'tpope/vim-fugitive'
 " Plugin 'Shougo/neosnippet.vim'
@@ -238,4 +239,9 @@ set statusline+=%*
 " let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" solarized
+syntax enable
+set background=dark
+colorscheme solarized
+let g:solarized_termcolors=256
 
