@@ -1,159 +1,65 @@
-"""""""""""""""""""""""""""""" Vbundle 配置 """""""""""""""""""""""""""""""""
-set nocompatible
-filetype off                  " required
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+filetype off
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+Plug 'majutsushi/tagbar'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-surround'
+Plug 'mbbill/undotree'
+Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/LeaderF'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
+" Plug 'whatyouhide/vim-gotham'
+Plug 'altercation/vim-colors-solarized'
 
-" plugin on GitHub repo
-Plugin 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
-Plugin 'vim-syntastic/syntastic'
+" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'justinmk/vim-dirvish'
 
-Plugin 'majutsushi/tagbar'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'surround.vim'
-Plugin 'the-NERD-tree'
-Plugin 'mbbill/undotree'
-Plugin 'Yggdroot/LeaderF'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'rust-lang/rust.vim'
-Plugin 'altercation/vim-colors-solarized'
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py' }
+Plug 'derekwyatt/vim-fswitch'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'Shougo/echodoc.vim'
 
-" Plugin 'tpope/vim-fugitive'
-" Plugin 'Shougo/neosnippet.vim'
-" Plugin 'Shougo/neocomplete.vim'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp', 'vim', 'python'] }
+Plug 'sgur/vim-textobj-parameter'
 
-" Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
+" Plugin 'airblade/vim-gitgutter'
+if has('nvim') || has('patch-8.0.902')
+  Plug 'mhinz/vim-signify'
+else
+  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+endif
 
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
+" Initialize plugin system
+call plug#end()
 
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" map Leader
+let mapleader=' '
 
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-" To ignore plugin indent changes, instead use:
-filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" You Complete me
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" Tagbar
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" gotags
-let g:tagbar_type_go = {
-	\ 'ctagstype' : 'go',
-	\ 'kinds'     : [
-		\ 'p:package',
-		\ 'i:imports:1',
-		\ 'c:constants',
-		\ 'v:variables',
-		\ 't:types',
-		\ 'n:interfaces',
-		\ 'w:fields',
-		\ 'e:embedded',
-		\ 'm:methods',
-		\ 'r:constructor',
-		\ 'f:functions'
-	\ ],
-	\ 'sro' : '.',
-	\ 'kind2scope' : {
-		\ 't' : 'ctype',
-		\ 'n' : 'ntype'
-	\ },
-	\ 'scope2kind' : {
-		\ 'ctype' : 't',
-		\ 'ntype' : 'n'
-	\ },
-	\ 'ctagsbin'  : 'gotags',
-	\ 'ctagsargs' : '-sort -silent'
-\ }
-
-map <silent> <F9> :TagbarToggle<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NERDTree
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let NERDTreeWinPos=0      " 在右侧显示
-let NERDTreeWinSize=25    " 设置宽度
-let NERDTreeShowBookmarks=0   " 是否显示书签
-let NERDTreeShowHidden=0  " 显示隐藏文件
-let NERDChristmasTree=0
-map <silent> <F8> :NERDTreeToggle<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Undotree
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <silent> <F10> :UndotreeToggle<CR>
-set backup
-set undofile
-set undodir=~/.undodir
-set backupdir=~/.bkdir
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" airline
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline_theme='violet'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#whitespace#symbol = '!'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" easy motion
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>j <Plug>(easymotion-prefix)
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" fzf 快速查找文件
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set rtp+=/usr/local/opt/fzf
-map <leader>sf :FZF<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " custom config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+highlight LineNr ctermbg=none
+highlight LineNr ctermfg=grey
+
 set history=50      " keep 50 lines of command line history
 set ruler       " show the cursor position all the time
 set showcmd     " display incomplete commands
 set cc=80
-highlight ColorColumn ctermbg=8
-
+" highlight ColorColumn ctermbg=8
 set backspace=indent,eol,start
 
 " 解决中文文件乱码
-set fileencodings=utf-8,gbk,gbk2312,cp936
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+set termencoding=utf-8
+set encoding=utf-8
 
 " 显示行号
 set number
@@ -170,13 +76,7 @@ syntax on
 
 set ts=4
 set sw=4
-" set expandtab
-set autoindent
-
-" set foldmethod=syntax
-
-" map Leader
-let mapleader=' '
+set expandtab
 
 " quickfix list
 nnoremap <leader>cn :cnext<CR>
@@ -189,6 +89,11 @@ nnoremap <leader>lp :lprevious<CR>
 " windows
 nnoremap <leader>wc :close<CR>
 nnoremap <leader>wo :only<CR>
+nnoremap <leader>wj <C-W>j
+nnoremap <leader>wk <C-W>k
+nnoremap <leader>wh <C-W>h
+nnoremap <leader>wl <C-W>l
+
 nnoremap <leader>w+ <C-W>+
 nnoremap <leader>w- <C-W>-
 nnoremap <leader>w< <C-W><
@@ -198,7 +103,6 @@ nnoremap <leader>w= <C-W>=
 nnoremap <leader>wp <C-W>p
 " move to new tab
 nnoremap <leader>wt <C-W>t 
-
 nnoremap <leader>ws <C-W>s 
 nnoremap <leader>wv <C-W>v 
 
@@ -207,41 +111,173 @@ nnoremap <leader>wv <C-W>v
 nnoremap <leader>bp :bprevious<CR>
 nnoremap <leader>bn :bnext<CR>
 nnoremap <leader>bl :ls<CR>
+nnoremap <leader>bd :bdelete<CR>
 
 " vimrc 
-nnoremap <leader>ve  :vsplit $MYVIMRC<CR>
+nnoremap <leader>ve  :split $MYVIMRC<CR>
 nnoremap <leader>vs :source $MYVIMRC<CR>
-
-" clear seach highlight
-nnoremap <leader>sc :nohlsearch<CR>
 
 " command for format json
 command! FormatJSON %!python -m json.tool
 
 " sign
-iabbrev cjl changjiulong@4paradigm.com
+iabbrev cjl changjiulong@baidu.com
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"" Syntastic
+"" Tagbar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" errors
-nnoremap <leader>en :lnext<CR>
-nnoremap <leader>ep :lprevious<CR>
-nnoremap <leader>el :Errors<CR>
-nnoremap <leader>ec :SyntasticReset<CR>
+map <silent> <F9> :TagbarToggle<CR>
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDTree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" let NERDTreeWinPos=0      " 在右侧显示
+" let NERDTreeWinSize=25    " 设置宽度
+" let NERDTreeShowBookmarks=0   " 是否显示书签
+" let NERDTreeShowHidden=0  " 显示隐藏文件
+" let NERDChristmasTree=0
+" map <silent> <F8> :NERDTreeToggle<CR>
 
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Undotree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <silent> <F10> :UndotreeToggle<CR>
+set backup
+set undofile
+set undodir=~/.undodir
+set backupdir=~/.bkdir
 
-" solarized
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" airline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set t_Co=256
+let g:airline_theme='badwolf'
+"let g:airline_solarized_bg='dark'
+"let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#symbol = '!'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" easy motion
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" map <leader>j <Plug>(easymotion-prefix)
+nmap <Leader>jw <Plug>(easymotion-overwin-w)
+nmap <Leader>jl <Plug>(easymotion-overwin-line)
+nmap <Leader>jc <Plug>(easymotion-overwin-f)
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fzf
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" don't show the help in normal mode
+let g:Lf_HideHelp = 1
+let g:Lf_UseCache = 0
+let g:Lf_UseVersionControlTool = 0
+let g:Lf_IgnoreCurrentBufferName = 0
+" popup mode
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
+let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "DejaVu Sans Mono for Powerline" }
+let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
+
+let g:Lf_CommandMap = {'<C-K>': ['<C-P>'], '<C-J>': ['<C-N>']}
+let g:Lf_RootMarkers = ['.project', '.git']
+let g:Lf_WorkingDirectoryMode = 'Ac'
+
+let g:Lf_ShortcutF = "<leader>ff"
+let g:Lf_PythonVersion = "3"
+noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
+noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
+noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
+noremap <leader>fl :<C-U><C-R>=printf("Leaderf line %s", "")<CR><CR>
+
+nnoremap <leader>ss :Leaderf rg -F --stayOpen<CR>
+nnoremap <leader>sw :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
+nnoremap <leader>sW :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+
+" search visually selected text literally
+xnoremap <leader>sv :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR>
+noremap <leader>so :<C-U>Leaderf! rg --recall<CR>
+
+" search tags
+let g:Lf_GtagsAutoGenerate = 1
+let g:Lf_Gtagslabel = 'native-pygments'
+noremap <leader>tr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>td :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>tt :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
+noremap <leader>tn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
+noremap <leader>tp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Solarized
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
 set background=dark
+" colorscheme gotham
 colorscheme solarized
 let g:solarized_termcolors=256
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" YouCompleteMe
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ycm_server_python_interpreter='/home/changjiulong/.jumbo/bin/python3.6'
+let g:ycm_extra_conf_vim_data = ['&filetype']
+let g:ycm_global_ycm_extra_conf='/home/changjiulong/.vim/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
+" let g:ycm_seed_identifiers_with_syntax=1
+let g:ycm_min_num_identifier_candidate_chars = 2
+let g:ycm_key_invoke_completion = '<c-z>'
+noremap <c-z> <NOP>
+set completeopt=menu,menuone
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_server_log_level = 'info'
+"在注释输入中也能补全
+let g:ycm_complete_in_comments = 1
+"在字符串输入中也能补全
+let g:ycm_complete_in_strings = 1
+"注释和字符串中的文字也会被收入补全
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
+nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_semantic_triggers =  {
+			\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+			\ 'cs,lua,javascript': ['re!\w{2}'],
+			\ }
+let g:ycm_filetype_whitelist = { 
+			\ "c":1,
+			\ "cpp":1, 
+			\ "sh":1,
+			\ "zsh":1,
+			\ }
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fswitch
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>gg :FSHere<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Signify
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set updatetime=100
+nmap <leader>hn <plug>(signify-next-hunk)
+nmap <leader>hp <plug>(signify-prev-hunk)
+
+nnoremap <leader>hl :SignifyDiff<CR>
+nnoremap <leader>hd :SignifyHunkDiff<CR>
+nnoremap <leader>hu :SignifyHunkUndo<CR>
+" nmap <leader>hJ 9999<leader>gj
+" nmap <leader>hK 9999<leader>gk
+" Hunk text object
+omap ih <plug>(signify-motion-inner-pending)
+xmap ih <plug>(signify-motion-inner-visual)
+omap ah <plug>(signify-motion-outer-pending)
+xmap ah <plug>(signify-motion-outer-visual)
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" echodoc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set noshowmode
+let g:echodoc_enable_at_startup = 1
+
 
