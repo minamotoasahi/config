@@ -16,6 +16,7 @@ Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 Plug 'Yggdroot/indentLine'
 
 Plug 'altercation/vim-colors-solarized'
+Plug 'dracula/vim', { 'name': 'dracula' }
 
 Plug 'justinmk/vim-dirvish'
 
@@ -33,7 +34,7 @@ Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
 
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Plugin 'airblade/vim-gitgutter'
 if has('nvim') || has('patch-8.0.902')
@@ -70,7 +71,7 @@ set hls
 set is
 filetype on
 filetype plugin on
-filetype indent on 
+filetype indent on
 syntax on
 
 set ts=4
@@ -102,9 +103,9 @@ nnoremap <leader>w= <C-W>=
 " next window
 nnoremap <leader>wp <C-W>p
 " move to new tab
-nnoremap <leader>wt <C-W>t 
-nnoremap <leader>ws <C-W>s 
-nnoremap <leader>wv <C-W>v 
+nnoremap <leader>wt <C-W>t
+nnoremap <leader>ws <C-W>s
+nnoremap <leader>wv <C-W>v
 
 " buffer
 nnoremap <leader>bp :bprevious<CR>
@@ -112,7 +113,7 @@ nnoremap <leader>bn :bnext<CR>
 nnoremap <leader>bl :ls<CR>
 nnoremap <leader>bd :bdelete<CR>
 
-" vimrc 
+" vimrc
 nnoremap <leader>ve :e $MYVIMRC<CR>
 nnoremap <leader>vs :source $MYVIMRC<CR>
 
@@ -271,6 +272,7 @@ nnoremap <leader>ii :IndentLinesToggle<CR>
 syntax enable
 set background=dark
 colorscheme solarized
+"colorscheme dracula
 
 " proto file setting -----------------------{{{
 function! ValidProtoMessage()
@@ -367,4 +369,3 @@ augroup filetype_cpp
     autocmd FileType c,cpp nnoremap <buffer> <leader>xd  :call MacroFormat()<CR>
 augroup END
 " }}}
-
